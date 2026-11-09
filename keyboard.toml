@@ -7,6 +7,11 @@ manufacturer = "RMK"
 # chip = "nrf52840"
 board = "nice!nano_v2"
 
+[rmk]
+fork_max_num = 255
+macro_space_size = 65535
+morse_max_num = 255
+
 [matrix]
 row_pins = [
     "P0_06", # D1
@@ -27,6 +32,8 @@ col_pins = [
     "P0_22", # D4
 ]
 bootmagic = [3, 9]
+
+[host]
 unlock_keys = [[3, 9], [3, 0]]
 
 [layout]
@@ -55,11 +62,11 @@ enabled = true
 # charge_led.pin = "P0_29"
 # charge_led.low_active = false
 
-[display]
-driver = "ssd1306"
-size = "128x64"
-rotation = 180
-renderer = "OledRenderer"
+# [display]
+# driver = "ssd1306"
+# size = "128x64"
+# rotation = 180
+# renderer = "OledRenderer"
 
 [keymap]
 layers = 4
@@ -68,20 +75,20 @@ layers = 4
 name = "Colemak"
 keys = """
     B           @fQuot      W           F                                   U           Y           @fUnds      J
-        @A_LGui     @R_LAlt     @S_LCtl     P                       L           @E_RCtl     @I_LAlt     @O_RGui
-    @X_Undo     @V_Cut      @C_Copy     @T_LSft     @G_RAlt     @M_RAlt     @N_RSft     K           Comma       Dot
-                    @Esc_LC     @D_Pste     @Q_Undo                 Z           H           Del
-                            @Ent_LSft   @Spc_F22 Tab            Compose     Bspc        OSM(LSft)
+        @A_LGui     @R_LAlt     @S_LCtrl    P                       L           @E_RCtrl    @I_LAlt     @O_RGui
+    @X_Undo     @V_Cut      @C_Copy     @T_LShift   @G_RAlt     @M_RAlt     @N_RShift   K           Comma       Dot
+                    @Esc_LC     @D_Pste     @Q_Redo                 Z           H           Del
+                            @Ent_LShift @Spc_F22 Tab            F24         Bspc        OSM(LShift)
                                             @tdNum                  @tdNav
 """
 
 [[keymap.layer]]
 name = "Numeric"
 keys = """
-    Eql         @fLT        @fBrc       @fCbr                               @fExcl      @fAmp       Mins        @fGT
+    Eql         @fLT        LBrc        @fCbr                               @fExcl      @fAmp       Mins        @fGT
         7           5           3           @fPrn                   @fQues      2           4           6
-    Grv         @fHash      @fAst       1       @Bsls_Ralt      Slsh        0           @fPlus      ____        ____
-                    ____        9           @fPct                   @fDlr       8           ____
+    Grv         @fHash      @fAst       1           @Bsls_RAlt  Slsh        0           @fPlus      ____        ____
+                    ____        9           @fPct                       @fDlr       8           ____
                             ____        ____        ____        ____        ____        ____
                                             ____                    ____
 """
@@ -90,9 +97,9 @@ keys = """
 name = "Navigation"
 keys = """
     PScr        Caps        @CapsWord   Home                                F4          F7          F10         App
-        Left        Down        Up          End                     F1          @F5_RCtl    @F8_LAlt    @F11_RGui
-    @Undo_LGui  @Cut_LAlt   @Copy_LCtl  Right       TO(Game)    @PgUp_RAlt  @F2_RSft    F6          F9          F12
-                    ____        @Pste_LSft  @Redo_RAlt              PgDn        F3          ____
+        Left        Down        Up          End                     F1          @F5_RCtrl   @F8_LAlt    @F11_RGui
+    @Undo_LGui  @Cut_LAlt   @Copy_LCtrl Right       TO(Game)    @PgUp_RAlt  @F2_RShift  F6          F9          F12
+                    ____       @Pste_LShift @Redo_RAlt                  PgDn        F3          ____
                             ____        ____        ____        ____        ____        ____
                                             ____                    ____
 """
@@ -101,97 +108,100 @@ keys = """
 name = "Game"
 keys = """
     E           1           2           3                                   F16         F19        F22          Bootloader
-        A           S           W           4                       F13         F17         F20           F23
-    6           7           8           D           5           BT_Nxt      F14         F18         F21         F24
-                    ____        9           R                       BT_Clr      F15         ____
-                            LSft        Spc         Tab         ____        TO(0)       ____
-                                            LCtl                    ____
+        A           S           W           4                       F13         F17         F20         F23
+    6           7           8           D           5           @btNxt      F14         F18         F21         F24
+                    ____        9           R                       @btClr      F15         ____
+                            LShift      Spc         Tab         ____        TO(0)       ____
+                                            LCtrl                   ____
 """
 
 [aliases]
 CapsWord = "CapsWordToggle"
+Compose = "F24"
+btNxt = "User3"
+btClr = "User5"
 
 # ---- Shifted Keys ----
-Excl = "SHIFTED(1)"
-At = "SHIFTED(2)"
-Hash = "SHIFTED(3)"
-Dlr = "SHIFTED(4)"
-Pct = "SHIFTED(5)"
-Crt = "SHIFTED(6)"
-Amp = "SHIFTED(7)"
-Ast = "SHIFTED(8)"
-LPrn = "SHIFTED(9)"
-RPrn = "SHIFTED(0)"
-Unds = "SHIFTED(Mins)"
-Plus = "SHIFTED(Eql)"
-Tild = "SHIFTED(Grv)"
-LCbr = "SHIFTED(LBrc)"
-RCbr = "SHIFTED(RBrc)"
-Pipe = "SHIFTED(Bsls)"
-Cln = "SHIFTED(Scln)"
-DQuo = "SHIFTED(Quot)"
-LT = "SHIFTED(Comm)"
-GT = "SHIFTED(Dot)"
-Ques = "SHIFTED(Slsh)"
+Excl = "Shifted(1)"
+At = "Shifted(2)"
+Hash = "Shifted(3)"
+Dlr = "Shifted(4)"
+Pct = "Shifted(5)"
+Crt = "Shifted(6)"
+Amp = "Shifted(7)"
+Ast = "Shifted(8)"
+LPrn = "Shifted(9)"
+RPrn = "Shifted(0)"
+Unds = "Shifted(Mins)"
+Plus = "Shifted(Eql)"
+Tild = "Shifted(Grv)"
+LCbr = "Shifted(LBrc)"
+RCbr = "Shifted(RBrc)"
+Pipe = "Shifted(Bsls)"
+Cln = "Shifted(Scln)"
+DQuo = "Shifted(Quot)"
+LT = "Shifted(Comm)"
+GT = "Shifted(Dot)"
+Ques = "Shifted(Slsh)"
 
 # ---- Shortcuts ----
-Undo = "WM(Z, LCtl)"
-Cut = "WM(X, LCtl)"
-Copy = "WM(C, LCtl)"
-Pste = "WM(V, LCtl)"
-Redo = "WM(Y, LCtl)"
+Undo = "WM(Z, LCtrl)"
+Cut = "WM(X, LCtrl)"
+Copy = "WM(C, LCtrl)"
+Pste = "WM(V, LCtrl)"
+Redo = "WM(Y, LCtrl)"
 
 # ---- Tap / Holds ----
 # Escape / Layer Clear
 Esc_LC = "TH(Esc, TO(0))"
 
 # Thumb Keys
-Ent_LSft = "MT(Ent, LSft, T)"
+Ent_LShift = "MT(Ent, LShift, T)"
 Spc_F22 = "TH(Spc, F22, T)"
 
 # Colemak Layer
 A_LGui = "MT(A, LGui, P)"
 R_LAlt = "MT(R, LAlt, R)"
-S_LCtl = "MT(S, LCtl, M)"
-T_LSft = "MT(T, LSft, I)"
+S_LCtrl = "MT(S, LCtrl, M)"
+T_LShift = "MT(T, LShift, I)"
 G_RAlt = "MT(G, RAlt, N)"
 M_RAlt = "MT(M, RAlt, N)"
-N_RSft = "MT(N, RSft, I)"
-E_RCtl = "MT(E, RCtl, M)"
+N_RShift = "MT(N, RShift, I)"
+E_RCtrl = "MT(E, RCtrl, M)"
 I_LAlt = "MT(I, LAlt, R)"
 O_RGui = "MT(O, RGui, P)"
-X_Undo = "TH(X, @Undo, P)"
-V_Cut = "TH(V, @Cut, R)"
-C_Copy = "TH(C, @Copy, M)"
-D_Pste = "TH(D, @Pste, I)"
-Q_Redo = "TH(Q, @Redo, N)"
+X_Undo = "TH(X, WM(Z, LCtrl), P)"
+V_Cut = "TH(V, WM(X, LCtrl), R)"
+C_Copy = "TH(C, WM(C, LCtrl), M)"
+D_Pste = "TH(D, WM(V, LCtrl), I)"
+Q_Redo = "TH(Q, WM(Y, LCtrl), N)"
 
 # Numeric Layer
 7_LGui = "MT(7, LGui, P)"
 5_LAlt = "MT(5, LAlt, R)"
-3_LCtl = "MT(3, LCtl, M)"
-1_LSft = "MT(1, LSft, I)"
+3_LCtrl = "MT(3, LCtrl, M)"
+1_LShift = "MT(1, LShift, I)"
 Bsls_RAlt = "MT(Bsls, RAlt, N)"
 Slsh_RAlt = "MT(Slsh, RAlt, N)"
-0_RSft = "MT(0, RSft, I)"
-2_RCtl = "MT(2, RCtl, M)"
+0_RShift = "MT(0, RShift, I)"
+2_RCtrl = "MT(2, RCtrl, M)"
 4_LAlt = "MT(4, LAlt, R)"
 6_RGui = "MT(6, RGui, P)"
-Grv_Undo = "TH(Grv, @Undo, P)"
-Hash_Cut = "TH(Hash, @Cut, R)"
-Ast_Copy = "TH(Ast, @Copy, M)"
-9_Pste = "TH(9, @Pste, I)"
-Pct_Redo = "TH(Pct, @Redo, N)"
+Grv_Undo = "TH(Grv, WM(Z, LCtrl), P)"
+Hash_Cut = "TH(Hash, WM(X, LCtrl), R)"
+Ast_Copy = "TH(Ast, WM(C, LCtrl), M)"
+9_Pste = "TH(9, WM(V, LCtrl), I)"
+Pct_Redo = "TH(Pct, WM(Y, LCtrl), N)"
 
 # Navigation Layer
-Undo_LGui = "TH(@Undo, LGui)"
-Cut_LAlt = "TH(@Cut, LAlt)"
-Copy_LCtl = "TH(@Copy, LCtl)"
-Pste_LSft = "TH(@Pste, LSft)"
-Redo_RAlt = "TH(@Redo, RAlt)"
+Undo_LGui = "TH(WM(Z, LCtrl), LGui)"
+Cut_LAlt = "TH(WM(X, LCtrl), LAlt)"
+Copy_LCtrl = "TH(WM(C, LCtrl), LCtrl)"
+Pste_LShift = "TH(WM(V, LCtrl), LShift)"
+Redo_RAlt = "TH(WM(Y, LCtrl), RAlt)"
 PgUp_RAlt = "TH(PgUp, RAlt)"
-F2_RSft = "TH(F2, RSft)"
-F5_RCtl = "TH(F5, RCtl)"
+F2_RShift = "TH(F2, RShift)"
+F5_RCtrl = "TH(F5, RCtrl)"
 F8_LAlt = "TH(F8, LAlt)"
 F11_RGui = "TH(F11, RGui)"
 
@@ -216,457 +226,426 @@ tdNum = "TD(0)"
 tdNav = "TD(1)"
 tdQuot = "TD(2)"
 tdDQuo = "TD(3)"
-tdPar = "TD(4)"
+tdPrn = "TD(4)"
 tdBrc = "TD(5)"
 tdCbr = "TD(6)"
 tdAng = "TD(7)"
+tdExcl = "TD(8)"
+tdQues = "TD(9)"
 
 [behavior.fork]
 forks = [
     # Colemak Layer
     # Quote / Double Quote
-    { trigger = "@fQuot", negative_output = "@tdQuot", positive_output = "@tdDQuo", match_any = "LSft | RSft" },
+    { trigger = "User11", negative_output = "TD(2)", positive_output = "TD(3)", match_any = "LShift | RShift" },
     # Underscore / Hyphen
-    { trigger = "@fUnds", negative_output = "@Unds", positive_output = "Mins", match_any = "LSft | RSft" },
+    { trigger = "User12", negative_output = "Shifted(Mins)", positive_output = "Mins", match_any = "LShift | RShift" },
     # Comma / Semicolon
-    { trigger = "Comm", negative_output = "Comm", positive_output = "Scln", match_any = "LSft | RSft" },
+    { trigger = "Comm", negative_output = "Comm", positive_output = "Scln", match_any = "LShift | RShift" },
     # Dot / Colon
-    { trigger = "Dot", negative_output = "Dot", positive_output = "@Cln", match_any = "LSft | RSft" },
+    { trigger = "Dot", negative_output = "Dot", positive_output = "Shifted(Scln)", match_any = "LShift | RShift" },
     # Numeric Layer
     # Less Than / Less Than or Equal
-    { trigger = "@fLT", negative_output = "@tdAng", positive_output = "@LTE", match_any = "LSft | RSft" },
+    { trigger = "User13", negative_output = "TD(7)", positive_output = "Macro(17)", match_any = "LShift | RShift" },
     # Left Bracket / Right Bracket
-    { trigger = "LBrc", negative_output = "@tdBrc", positive_output = "RBrc", match_any = "LSft | RSft" },
+    { trigger = "LBrc", negative_output = "TD(5)", positive_output = "RBrc", match_any = "LShift | RShift" },
     # Left Brace / Right Brace
-    { trigger = "@fCbr", negative_output = "@tdCbr", positive_output = "@RCbr", match_any = "LSft | RSft" },
+    { trigger = "User14", negative_output = "TD(6)", positive_output = "Shifted(RBrc)", match_any = "LShift | RShift" },
     # Exclamation / Inverted Exclamation
-    { trigger = "@fExcl", negative_output = "@Excl", positive_output = "Macro(iexcl)", match_any = "LSft | RSft" },
+    { trigger = "User15", negative_output = "Shifted(1)", positive_output = "Macro(0)", match_any = "LShift | RShift" },
     # Ampersand / Interrobang
-    { trigger = "@fAmp", negative_output = "@Amp", positive_output = "Macro(intb)", match_any = "LSft | RSft" },
+    { trigger = "User16", negative_output = "Shifted(7)", positive_output = "Macro(10)", match_any = "LShift | RShift" },
     # Greater Than / Greater than or Equal
-    { trigger = "@fGT", negative_output = "@GT", positive_output = "@GTE", match_any = "LSft | RSft" },
+    { trigger = "User17", negative_output = "Shifted(Dot)", positive_output = "Macro(16)", match_any = "LShift | RShift" },
     # 7 / Square Root
-    { trigger = "7", negative_output = "MT(7, LGui)", positive_output = "MT(Macro(sqrt), LGui)", match_any = "LSft | RSft" },
+    { trigger = "7", negative_output = "MT(7, LGui)", positive_output = "MT(Macro(12), LGui)", match_any = "LShift | RShift" },
     # 5 / Euro
-    { trigger = "5", negative_output = "MT(5, LAlt)", positive_output = "MT(Macro(euro), LAlt)", match_any = "LSft | RSft" },
+    { trigger = "5", negative_output = "MT(5, LAlt)", positive_output = "MT(Macro(11), LAlt)", match_any = "LShift | RShift" },
     # 3 / Micro
-    { trigger = "3", negative_output = "MT(3, LCtl)", positive_output = "MT(Macro(micro), LCtl)", match_any = "LSft | RSft" },
+    { trigger = "3", negative_output = "MT(3, LCtrl)", positive_output = "MT(Macro(6), LCtrl)", match_any = "LShift | RShift" },
     # Left Paren / Right Paren
-    { trigger = "@fPrn", negative_output = "@tdPrn", positive_output = "@RPrn", match_any = "LSft | RSft" },
+    { trigger = "User18", negative_output = "TD(4)", positive_output = "Shifted(0)", match_any = "LShift | RShift" },
     # Question / Inverted Question
-    { trigger = "@fQues", negative_output = "@tdQues", positive_output = "Macro(iques)", match_any = "LSft | RSft" },
+    { trigger = "User19", negative_output = "TD(9)", positive_output = "Macro(7)", match_any = "LShift | RShift" },
     # 2 / Tilde
-    { trigger = "2", negative_output = "MT(2, RCtl)", positive_output = "MT(@Tild, RCtl)", match_any = "LSft | RSft" },
+    { trigger = "2", negative_output = "MT(2, RCtrl)", positive_output = "MT(Shifted(Grv), RCtrl)", match_any = "LShift | RShift" },
     # 4 / Degree
-    { trigger = "4", negative_output = "MT(4, LAlt)", positive_output = "MT(Macro(deg), LAlt)", match_any = "LSft | RSft" },
+    { trigger = "4", negative_output = "MT(4, LAlt)", positive_output = "MT(Macro(3), LAlt)", match_any = "LShift | RShift" },
     # Grave / Acute
-    { trigger = "Grv", negative_output = "TH(Grv, @Undo)", positive_output = "TH(Macro(acute), @Undo)", match_any = "LSft | RSft" },
+    { trigger = "Grv", negative_output = "TH(Grv, WM(Z, LCtrl))", positive_output = "TH(Macro(5), WM(Z, LCtrl))", match_any = "LShift | RShift" },
     # Hash / UK Pound
-    { trigger = "@fHash", negative_output = "TH(@Hash, @Cut)", positive_output = "TH(Macro(gbp), @Cut)", match_any = "LSft | RSft" },
+    { trigger = "User20", negative_output = "TH(Shifted(3), WM(X, LCtrl))", positive_output = "TH(Macro(2), WM(X, LCtrl))", match_any = "LShift | RShift" },
     # Asterisk / Multiplication Sign
-    { trigger = "@fAst", negative_output = "TH(@Ast, @Copy)", positive_output = "TH(Macro(mult), @Copy)", match_any = "LSft | RSft" },
+    { trigger = "User21", negative_output = "TH(Shifted(8), WM(C, LCtrl))", positive_output = "TH(Macro(8), WM(C, LCtrl))", match_any = "LShift | RShift" },
     # 1 / N Dash
-    { trigger = "1", negative_output = "MT(1, LSft)", positive_output = "MT(Macro(ndash), LSft)", match_any = "LSft | RSft" },
+    { trigger = "1", negative_output = "MT(1, LShift)", positive_output = "MT(Macro(19), LShift)", match_any = "LShift | RShift" },
     # Slash / Division Sign
-    { trigger = "Slsh", negative_output = "MT(Slsh, RAlt)", positive_output = "MT(Macro(div), RAlt)", match_any = "LSft | RSft" },
+    { trigger = "Slsh", negative_output = "MT(Slsh, RAlt)", positive_output = "MT(Macro(9), RAlt)", match_any = "LShift | RShift" },
     # 0 / At Sign
-    { trigger = "0", negative_output = "MT(0, RSft)", positive_output = "MT(@At, RSft)", match_any = "LSft | RSft" },
+    { trigger = "0", negative_output = "MT(0, RShift)", positive_output = "MT(Shifted(2), RShift)", match_any = "LShift | RShift" },
     # Plus / Plus or Minus
-    { trigger = "@fPlus", negative_output = "@Plus", positive_output = "Macro(plmn)", match_any = "LSft | RSft" },
+    { trigger = "User22", negative_output = "Shifted(Eql)", positive_output = "Macro(4)", match_any = "LShift | RShift" },
     # 9 / M Dash
-    { trigger = "9", negative_output = "TH(9, @Pste)", positive_output = "TH(Macro(mdash), @Pste)", match_any = "LSft | RSft" },
+    { trigger = "9", negative_output = "TH(9, WM(V, LCtrl))", positive_output = "TH(Macro(18), WM(V, LCtrl))", match_any = "LShift | RShift" },
     # Percent / Per mille
-    { trigger = "@fPct", negative_output = "TH(@Pct, @Redo)", positive_output = "TH(Macro(perm), @Redo)", match_any = "LSft | RSft" },
+    { trigger = "User23", negative_output = "TH(Shifted(5), WM(Y, LCtrl))", positive_output = "TH(Macro(15), WM(Y, LCtrl))", match_any = "LShift | RShift" },
     # Dollar / Cent
-    { trigger = "@fDlr", negative_output = "@Dlr", positive_output = "Macro(cent)", match_any = "LSft | RSft" },
+    { trigger = "User24", negative_output = "Shifted(4)", positive_output = "Macro(1)", match_any = "LShift | RShift" },
     # 8 / Infinity
-    { trigger = "8", negative_output = "8", positive_output = "Macro(inf)", match_any = "LSft | RSft" },
+    { trigger = "8", negative_output = "8", positive_output = "Macro(13)", match_any = "LShift | RShift" },
 ]
 
-[[behavior.macro.macros]]
 # Unicode Macros
-iexcl = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "A" },
-    { operation = "tap", keycode = "1" },
-    { operation = "up", keycode = "Compose" },
+# 0: Inverted Exclamation Mark
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00a1" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-cent = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "A" },
-    { operation = "tap", keycode = "2" },
-    { operation = "up", keycode = "Compose" },
+# 1: Cent Sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00a2" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-gbp = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "A" },
-    { operation = "tap", keycode = "3" },
-    { operation = "up", keycode = "Compose" },
+# 2: UK Pound Sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00a3" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-deg = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "B" },
-    { operation = "tap", keycode = "0" },
-    { operation = "up", keycode = "Compose" },
+# 3: Degree Sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00b0" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-plmn = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "A" },
-    { operation = "tap", keycode = "2" },
-    { operation = "up", keycode = "Compose" },
+# 4: Plus-or-minus sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00b1" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-acute = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "B" },
-    { operation = "tap", keycode = "4" },
-    { operation = "up", keycode = "Compose" },
+# 5: Acute accent
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00b4" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-micro = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "B" },
-    { operation = "tap", keycode = "5" },
-    { operation = "up", keycode = "Compose" },
+# 6: Micro Sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00b5" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-iques = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "B" },
-    { operation = "tap", keycode = "F" },
-    { operation = "up", keycode = "Compose" },
+# 7: Inverted Question Mark
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00bf" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-mult = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "D" },
-    { operation = "tap", keycode = "7" },
-    { operation = "up", keycode = "Compose" },
+# 8: Multiplication sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00d7" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-div = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "F" },
-    { operation = "tap", keycode = "7" },
-    { operation = "up", keycode = "Compose" },
+# 9: Division Sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00f7" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-intb = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "3" },
-    { operation = "tap", keycode = "D" },
-    { operation = "up", keycode = "Compose" },
+# 10: Interrobang
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u203d" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-euro = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "A" },
-    { operation = "tap", keycode = "C" },
-    { operation = "up", keycode = "Compose" },
+# 11: Euro Sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u20ac" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-sqrt = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "1" },
-    { operation = "tap", keycode = "A" },
-    { operation = "up", keycode = "Compose" },
+# 12: Square Root
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u221a" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-inf = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "1" },
-    { operation = "tap", keycode = "E" },
-    { operation = "up", keycode = "Compose" },
+# 13: Infinity symbol
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u221e" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-neq = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "6" },
-    { operation = "tap", keycode = "0" },
-    { operation = "up", keycode = "Compose" },
+# 14: Not Equal sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u2260" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-perm = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "3" },
-    { operation = "tap", keycode = "0" },
-    { operation = "up", keycode = "Compose" },
+# 15: Per mille sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u2030" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-gte = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "6" },
-    { operation = "tap", keycode = "5" },
-    { operation = "up", keycode = "Compose" },
+# 16: Greater than or equal sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u2265" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-lte = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "6" },
-    { operation = "tap", keycode = "4" },
-    { operation = "up", keycode = "Compose" },
+# 17: Less than or equal sign
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u2264" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-mdash = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "1" },
-    { operation = "tap", keycode = "4" },
-    { operation = "up", keycode = "Compose" },
+# 18: Em Dash
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u2014" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
-ndash = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "2" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "1" },
-    { operation = "tap", keycode = "3" },
-    { operation = "up", keycode = "Compose" },
+# 19: En Dash
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u2013" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
 ]
 
 # Tap Dance Actions
-quot = [
+# 20: Single Quotes
+[[behavior.macro.macros]]
+operations = [
     { operation = "tap", keycode = "Quot" },
     { operation = "tap", keycode = "Quot" },
     { operation = "tap", keycode = "Left" },
 ]
 
-dquo = [
-    { operation = "tap", keycode = "@DQuo" },
-    { operation = "tap", keycode = "@Dquo" },
+# 21: Double Quotes
+[[behavior.macro.macros]]
+operations = [
+    { operation = "tap", keycode = "Shifted(Quot)" },
+    { operation = "tap", keycode = "Shifted(Quot)" },
     { operation = "tap", keycode = "Left" },
 ]
 
-prn = [
-    { operation = "tap", keycode = "@LPrn" },
-    { operation = "tap", keycode = "@RPrn" },
+# 22: Parentheses
+[[behavior.macro.macros]]
+operations = [
+    { operation = "tap", keycode = "Shifted(9)" },
+    { operation = "tap", keycode = "Shifted(0)" },
     { operation = "tap", keycode = "Left" },
 ]
 
-brc = [
+# 23: Brackets
+[[behavior.macro.macros]]
+operations = [
     { operation = "tap", keycode = "LBrc" },
     { operation = "tap", keycode = "RBrc" },
     { operation = "tap", keycode = "Left" },
 ]
 
-cbr = [
-    { operation = "tap", keycode = "@LCbr" },
-    { operation = "tap", keycode = "@RCbr" },
+# 24: Braces
+[[behavior.macro.macros]]
+operations = [
+    { operation = "tap", keycode = "Shifted(LBrc)" },
+    { operation = "tap", keycode = "Shifted(RBrc)" },
     { operation = "tap", keycode = "Left" },
 ]
 
-ang = [
-    { operation = "tap", keycode = "@LT" },
-    { operation = "tap", keycode = "@GT" },
+# 25: Angle Brackets
+[[behavior.macro.macros]]
+operations = [
+    { operation = "tap", keycode = "Shifted(Comm)" },
+    { operation = "tap", keycode = "Shifted(Dot)" },
     { operation = "tap", keycode = "Left" },
 ]
 
-excl = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "A" },
-    { operation = "tap", keycode = "1" },
-    { operation = "up", keycode = "Compose" },
+# 26: Exclamation Marks
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00a1" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
-    { operation = "tap", keycode = "@Excl" },
+    { operation = "tap", keycode = "Shifted(1)" },
     { operation = "tap", keycode = "Left" },
 ]
 
-ques = [
-    { operation = "up", keycode = "LSft" },
-    { operation = "up", keycode = "RSft" },
-    { operation = "down", keycode = "Compose" },
-    { operation = "tap", keycode = "U" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "0" },
-    { operation = "tap", keycode = "B" },
-    { operation = "tap", keycode = "F" },
-    { operation = "up", keycode = "Compose" },
+# 27: Question Marks
+[[behavior.macro.macros]]
+operations = [
+    { operation = "up", keycode = "LShift" },
+    { operation = "up", keycode = "RShift" },
+    { operation = "down", keycode = "F24" },
+    { operation = "text", text = "u00bf" },
+    { operation = "up", keycode = "F24" },
     { operation = "tap", keycode = "Enter" },
-    { operation = "tap", keycode = "@Ques" },
+    { operation = "tap", keycode = "Shifted(Slsh)" },
     { operation = "tap", keycode = "Left" },
 ]
 
 [behavior.morse]
 morses = [
-    # 0
+    # 0: Numeric Layer
     { tap_actions = [
         "OSL(1)",
         "TG(1)",
     ], hold_actions = [
         "MO(1)",
     ], profile = "T" },
-    # 1
+    # 1: Navigation Layer
     { tap_actions = [
         "OSL(2)",
         "TG(2)",
     ], hold_actions = [
         "MO(2)",
     ], profile = "T" },
-    # 2
+    # 2: Single Quotes
     { tap_actions = [
         "Quot",
-        "Macro(quot)",
+        "Macro(2)",
     ], profile = "P" },
-    # 3
+    # 3: Double Quotes
     { tap_actions = [
-        "@Dquo",
-        "Macro(dquo)",
+        "Shifted(Quot)",
+        "Macro(3)",
     ], profile = "P" },
-    # 4
+    # 4: Parentheses
     { tap_actions = [
-        "@LPrn",
-        "Macro(prn)",
+        "Shifted(9)",
+        "Macro(4)",
     ], profile = "I" },
-    # 5
+    # 5: Brackets
     { tap_actions = [
         "LBrc",
-        "Macro(brc)",
+        "Macro(5)",
     ], profile = "M" },
-    # 6
+    # 6: Braces
     { tap_actions = [
-        "@LCbr",
-        "Macro(cbr)",
+        "Shifted(LBrc)",
+        "Macro(6)",
     ], profile = "R" },
-    # 7
+    # 7: Angle Brackets
     { tap_actions = [
-        "@LT",
-        "Macro(ang)",
+        "Shifted(Comm)",
+        "Macro(7)",
     ], profile = "P" },
-    # 8
+    # 8: Exclamation Marks
     { tap_actions = [
-        "@Excl",
-        "Macro(excl)",
+        "Shifted(1)",
+        "Macro(8)",
     ], profile = "M" },
-    # 9
+    # 9: Question Marks
     { tap_actions = [
-        "@Ques",
-        "Macro(ques)",
+        "Shifted(Slsh)",
+        "Macro(9)",
     ], profile = "I" },
 ]
 
