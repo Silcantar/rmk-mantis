@@ -233,68 +233,209 @@ tdAng = "TD(7)"
 tdExcl = "TD(8)"
 tdQues = "TD(9)"
 
-[behavior.fork]
-forks = [
-    # Colemak Layer
-    # Quote / Double Quote
-    { trigger = "User11", negative_output = "TD(2)", positive_output = "TD(3)", match_any = "LShift | RShift" },
-    # Underscore / Hyphen
-    { trigger = "User12", negative_output = "Shifted(Mins)", positive_output = "Mins", match_any = "LShift | RShift" },
-    # Comma / Semicolon
-    { trigger = "Comm", negative_output = "Comm", positive_output = "Scln", match_any = "LShift | RShift" },
-    # Dot / Colon
-    { trigger = "Dot", negative_output = "Dot", positive_output = "Shifted(Scln)", match_any = "LShift | RShift" },
-    # Numeric Layer
-    # Less Than / Less Than or Equal
-    { trigger = "User13", negative_output = "TD(7)", positive_output = "Macro(17)", match_any = "LShift | RShift" },
-    # Left Bracket / Right Bracket
-    { trigger = "LBrc", negative_output = "TD(5)", positive_output = "RBrc", match_any = "LShift | RShift" },
-    # Left Brace / Right Brace
-    { trigger = "User14", negative_output = "TD(6)", positive_output = "Shifted(RBrc)", match_any = "LShift | RShift" },
-    # Exclamation / Inverted Exclamation
-    { trigger = "User15", negative_output = "Shifted(1)", positive_output = "Macro(0)", match_any = "LShift | RShift" },
-    # Ampersand / Interrobang
-    { trigger = "User16", negative_output = "Shifted(7)", positive_output = "Macro(10)", match_any = "LShift | RShift" },
-    # Greater Than / Greater than or Equal
-    { trigger = "User17", negative_output = "Shifted(Dot)", positive_output = "Macro(16)", match_any = "LShift | RShift" },
-    # 7 / Square Root
-    { trigger = "7", negative_output = "MT(7, LGui)", positive_output = "MT(Macro(12), LGui)", match_any = "LShift | RShift" },
-    # 5 / Euro
-    { trigger = "5", negative_output = "MT(5, LAlt)", positive_output = "MT(Macro(11), LAlt)", match_any = "LShift | RShift" },
-    # 3 / Micro
-    { trigger = "3", negative_output = "MT(3, LCtrl)", positive_output = "MT(Macro(6), LCtrl)", match_any = "LShift | RShift" },
-    # Left Paren / Right Paren
-    { trigger = "User18", negative_output = "TD(4)", positive_output = "Shifted(0)", match_any = "LShift | RShift" },
-    # Question / Inverted Question
-    { trigger = "User19", negative_output = "TD(9)", positive_output = "Macro(7)", match_any = "LShift | RShift" },
-    # 2 / Tilde
-    { trigger = "2", negative_output = "MT(2, RCtrl)", positive_output = "MT(Shifted(Grv), RCtrl)", match_any = "LShift | RShift" },
-    # 4 / Degree
-    { trigger = "4", negative_output = "MT(4, LAlt)", positive_output = "MT(Macro(3), LAlt)", match_any = "LShift | RShift" },
-    # Grave / Acute
-    { trigger = "Grv", negative_output = "TH(Grv, WM(Z, LCtrl))", positive_output = "TH(Macro(5), WM(Z, LCtrl))", match_any = "LShift | RShift" },
-    # Hash / UK Pound
-    { trigger = "User20", negative_output = "TH(Shifted(3), WM(X, LCtrl))", positive_output = "TH(Macro(2), WM(X, LCtrl))", match_any = "LShift | RShift" },
-    # Asterisk / Multiplication Sign
-    { trigger = "User21", negative_output = "TH(Shifted(8), WM(C, LCtrl))", positive_output = "TH(Macro(8), WM(C, LCtrl))", match_any = "LShift | RShift" },
-    # 1 / N Dash
-    { trigger = "1", negative_output = "MT(1, LShift)", positive_output = "MT(Macro(19), LShift)", match_any = "LShift | RShift" },
-    # Slash / Division Sign
-    { trigger = "Slsh", negative_output = "MT(Slsh, RAlt)", positive_output = "MT(Macro(9), RAlt)", match_any = "LShift | RShift" },
-    # 0 / At Sign
-    { trigger = "0", negative_output = "MT(0, RShift)", positive_output = "MT(Shifted(2), RShift)", match_any = "LShift | RShift" },
-    # Plus / Plus or Minus
-    { trigger = "User22", negative_output = "Shifted(Eql)", positive_output = "Macro(4)", match_any = "LShift | RShift" },
-    # 9 / M Dash
-    { trigger = "9", negative_output = "TH(9, WM(V, LCtrl))", positive_output = "TH(Macro(18), WM(V, LCtrl))", match_any = "LShift | RShift" },
-    # Percent / Per mille
-    { trigger = "User23", negative_output = "TH(Shifted(5), WM(Y, LCtrl))", positive_output = "TH(Macro(15), WM(Y, LCtrl))", match_any = "LShift | RShift" },
-    # Dollar / Cent
-    { trigger = "User24", negative_output = "Shifted(4)", positive_output = "Macro(1)", match_any = "LShift | RShift" },
-    # 8 / Infinity
-    { trigger = "8", negative_output = "8", positive_output = "Macro(13)", match_any = "LShift | RShift" },
-]
+# ---- Forks ----
+# Colemak Layer
 
+# 0: Quote / Double Quote
+[[behavior.fork.forks]]
+trigger = "User11"
+negative_output = "TD(2)"
+positive_output = "TD(3)"
+match_any = "LShift | RShift"
+
+# 1: Underscore / Hyphen
+[[behavior.fork.forks]]
+trigger = "User12"
+negative_output = "Shifted(Mins)"
+positive_output = "Mins"
+match_any = "LShift | RShift"
+
+# 2: Comma / Semicolon
+[[behavior.fork.forks]]
+trigger = "Comm"
+negative_output = "Comm"
+positive_output = "Scln"
+match_any = "LShift | RShift"
+
+# 3: Dot / Colon
+[[behavior.fork.forks]]
+trigger = "Dot"
+negative_output = "Dot"
+positive_output = "Shifted(Scln)"
+match_any = "LShift | RShift"
+
+# Numeric Layer
+
+# 4: Less Than / Less Than or Equal
+[[behavior.fork.forks]]
+trigger = "User13"
+negative_output = "TD(7)"
+positive_output = "Macro(17)"
+match_any = "LShift | RShift"
+
+# 5: Left Bracket / Right Bracket
+[[behavior.fork.forks]]
+trigger = "LBrc"
+negative_output = "TD(5)"
+positive_output = "RBrc"
+match_any = "LShift | RShift"
+
+# 6: Left Brace / Right Brace
+[[behavior.fork.forks]]
+trigger = "User14"
+negative_output = "TD(6)"
+positive_output = "Shifted(RBrc)"
+match_any = "LShift | RShift"
+
+# 7: Exclamation / Inverted Exclamation
+[[behavior.fork.forks]]
+trigger = "User15"
+negative_output = "Shifted(1)"
+positive_output = "Macro(0)"
+match_any = "LShift | RShift"
+
+# 8: Ampersand / Interrobang
+[[behavior.fork.forks]]
+trigger = "User16"
+negative_output = "Shifted(7)"
+positive_output = "Macro(10)"
+match_any = "LShift | RShift"
+
+# 9: Greater Than / Greater than or Equal
+[[behavior.fork.forks]]
+trigger = "User17"
+negative_output = "Shifted(Dot)"
+positive_output = "Macro(16)"
+match_any = "LShift | RShift"
+
+# 10: 7 / Square Root
+[[behavior.fork.forks]]
+trigger = "7"
+negative_output = "MT(7, LGui)"
+positive_output = "MT(Macro(12), LGui)"
+match_any = "LShift | RShift"
+
+# 11: 5 / Euro
+[[behavior.fork.forks]]
+trigger = "5"
+negative_output = "MT(5, LAlt)"
+positive_output = "MT(Macro(11), LAlt)"
+match_any = "LShift | RShift"
+
+# 13: 3 / Micro
+[[behavior.fork.forks]]
+trigger = "3"
+negative_output = "MT(3, LCtrl)"
+positive_output = "MT(Macro(6), LCtrl)"
+match_any = "LShift | RShift"
+
+# 14: Left Paren / Right Paren
+[[behavior.fork.forks]]
+trigger = "User18"
+negative_output = "TD(4)"
+positive_output = "Shifted(0)"
+match_any = "LShift | RShift"
+
+# 15: Question / Inverted Question
+[[behavior.fork.forks]]
+trigger = "User19"
+negative_output = "TD(9)"
+positive_output = "Macro(7)"
+match_any = "LShift | RShift"
+
+# 16: 2 / Tilde
+[[behavior.fork.forks]]
+trigger = "2"
+negative_output = "MT(2, RCtrl)"
+positive_output = "MT(Shifted(Grv), RCtrl)"
+match_any = "LShift | RShift"
+
+# 17: 4 / Degree
+[[behavior.fork.forks]]
+trigger = "4"
+negative_output = "MT(4, LAlt)"
+positive_output = "MT(Macro(3), LAlt)"
+match_any = "LShift | RShift"
+
+# 18: Grave / Acute
+[[behavior.fork.forks]]
+trigger = "Grv"
+negative_output = "TH(Grv, WM(Z, LCtrl))"
+positive_output = "TH(Macro(5), WM(Z, LCtrl))"
+match_any = "LShift | RShift"
+
+# 19: Hash / UK Pound
+[[behavior.fork.forks]]
+trigger = "User20"
+negative_output = "TH(Shifted(3), WM(X, LCtrl))"
+positive_output = "TH(Macro(2), WM(X, LCtrl))"
+match_any = "LShift | RShift"
+
+# 20: Asterisk / Multiplication Sign
+[[behavior.fork.forks]]
+trigger = "User21"
+negative_output = "TH(Shifted(8), WM(C, LCtrl))"
+positive_output = "TH(Macro(8), WM(C, LCtrl))"
+match_any = "LShift | RShift"
+
+# 21: 1 / N Dash
+[[behavior.fork.forks]]
+trigger = "1"
+negative_output = "MT(1, LShift)"
+positive_output = "MT(Macro(19), LShift)"
+match_any = "LShift | RShift"
+
+# 22: Slash / Division Sign
+[[behavior.fork.forks]]
+trigger = "Slsh"
+negative_output = "MT(Slsh, RAlt)"
+positive_output = "MT(Macro(9), RAlt)"
+match_any = "LShift | RShift"
+
+# 23: 0 / At Sign
+[[behavior.fork.forks]]
+trigger = "0"
+negative_output = "MT(0, RShift)"
+positive_output = "MT(Shifted(2), RShift)"
+match_any = "LShift | RShift"
+
+# 24: Plus / Plus or Minus
+[[behavior.fork.forks]]
+trigger = "User22"
+negative_output = "Shifted(Eql)"
+positive_output = "Macro(4)"
+match_any = "LShift | RShift"
+
+# 25: 9 / M Dash
+[[behavior.fork.forks]]
+trigger = "9"
+negative_output = "TH(9, WM(V, LCtrl))"
+positive_output = "TH(Macro(18), WM(V, LCtrl))"
+match_any = "LShift | RShift"
+
+# 26: Percent / Per mille
+[[behavior.fork.forks]]
+trigger = "User23"
+negative_output = "TH(Shifted(5), WM(Y, LCtrl))"
+positive_output = "TH(Macro(15), WM(Y, LCtrl))"
+match_any = "LShift | RShift"
+
+# 27: Dollar / Cent
+[[behavior.fork.forks]]
+trigger = "User24"
+negative_output = "Shifted(4)"
+positive_output = "Macro(1)"
+match_any = "LShift | RShift"
+
+# 28: 8 / Infinity
+[[behavior.fork.forks]]
+trigger = "8"
+negative_output = "8"
+positive_output = "Macro(13)"
+match_any = "LShift | RShift"
+
+
+# ---- Macros ----
 # Unicode Macros
 # 0: Inverted Exclamation Mark
 [[behavior.macro.macros]]
@@ -591,63 +732,58 @@ operations = [
     { operation = "tap", keycode = "Left" },
 ]
 
-[behavior.morse]
-morses = [
-    # 0: Numeric Layer
-    { tap_actions = [
-        "OSL(1)",
-        "TG(1)",
-    ], hold_actions = [
-        "MO(1)",
-    ], profile = "T" },
-    # 1: Navigation Layer
-    { tap_actions = [
-        "OSL(2)",
-        "TG(2)",
-    ], hold_actions = [
-        "MO(2)",
-    ], profile = "T" },
-    # 2: Single Quotes
-    { tap_actions = [
-        "Quot",
-        "Macro(2)",
-    ], profile = "P" },
-    # 3: Double Quotes
-    { tap_actions = [
-        "Shifted(Quot)",
-        "Macro(3)",
-    ], profile = "P" },
-    # 4: Parentheses
-    { tap_actions = [
-        "Shifted(9)",
-        "Macro(4)",
-    ], profile = "I" },
-    # 5: Brackets
-    { tap_actions = [
-        "LBrc",
-        "Macro(5)",
-    ], profile = "M" },
-    # 6: Braces
-    { tap_actions = [
-        "Shifted(LBrc)",
-        "Macro(6)",
-    ], profile = "R" },
-    # 7: Angle Brackets
-    { tap_actions = [
-        "Shifted(Comm)",
-        "Macro(7)",
-    ], profile = "P" },
-    # 8: Exclamation Marks
-    { tap_actions = [
-        "Shifted(1)",
-        "Macro(8)",
-    ], profile = "M" },
-    # 9: Question Marks
-    { tap_actions = [
-        "Shifted(Slsh)",
-        "Macro(9)",
-    ], profile = "I" },
-]
+# 0: Numeric Layer
+[[behavior.morse.morses]]
+tap_actions = ["OSL(1)", "TG(1)"]
+hold_actions = ["MO(1)",]
+profile = "T"
+
+# 1: Navigation Layer
+[[behavior.morse.morses]]
+tap_actions = ["OSL(2)", "TG(2)"]
+hold_actions = ["MO(2)"]
+profile = "T"
+
+# 2: Single Quotes
+[[behavior.morse.morses]]
+tap_actions = ["Quot","Macro(2)"]
+profile = "P"
+
+# 3: Double Quotes
+[[behavior.morse.morses]]
+tap_actions = ["Shifted(Quot)","Macro(3)"]
+profile = "P"
+
+# 4: Parentheses
+[[behavior.morse.morses]]
+tap_actions = ["Shifted(9)", "Macro(4)"]
+profile = "I"
+
+# 5: Brackets
+[[behavior.morse.morses]]
+tap_actions = ["LBrc", "Macro(5)"]
+profile = "M"
+
+# 6: Braces
+[[behavior.morse.morses]]
+tap_actions = ["Shifted(LBrc)", "Macro(6)"]
+profile = "R"
+
+# 7: Angle Brackets
+[[behavior.morse.morses]]
+tap_actions = ["Shifted(Comm)", "Macro(7)"]
+profile = "P"
+
+# 8: Exclamation Marks
+[[behavior.morse.morses]]
+tap_actions = ["Shifted(1)", "Macro(8)"]
+profile = "M"
+
+# 9: Question Marks
+[[behavior.morse.morses]]
+tap_actions = ["Shifted(Slsh)", "Macro(9)"]
+profile = "I"
+
 
 [behavior.morse.profiles.P]
 unilateral_tap = true
